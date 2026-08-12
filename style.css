@@ -1,0 +1,273 @@
+:root {
+  --bg: #faf6ee;
+  --text: #1b1815;
+  --muted: #6f6659;
+  --hair: #e2dacb;
+  --accent: #c2410c;
+  --faint: #8c8274;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #131110;
+    --text: #f3eee6;
+    --muted: #9a9186;
+    --hair: #2a2520;
+    --accent: #fb923c;
+    --faint: #7d7468;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 17px/1.72 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 72px 32px 96px;
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: 72px;
+  align-items: start;
+}
+
+@media (max-width: 880px) {
+  .wrap { grid-template-columns: 1fr; gap: 0; padding: 48px 22px 72px; }
+  nav.toc { display: none; }
+}
+
+nav.toc { position: sticky; top: 48px; }
+
+nav.toc .navtitle {
+  font: 600 11px/1 -apple-system, sans-serif;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin: 0 0 18px;
+}
+
+nav.toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; }
+nav.toc li { counter-increment: toc; margin: 0; border-top: 1px solid var(--hair); }
+nav.toc li:last-child { border-bottom: 1px solid var(--hair); }
+
+nav.toc a {
+  display: flex;
+  gap: 12px;
+  padding: 11px 0;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+nav.toc a::before {
+  content: counter(toc);
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+  min-width: 14px;
+}
+
+nav.toc a:hover { color: var(--accent); }
+
+.kicker {
+  font: 600 11px/1 -apple-system, sans-serif;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 20px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+h1 {
+  font-size: 52px;
+  line-height: 1.05;
+  margin: 0 0 20px;
+  letter-spacing: -.035em;
+  font-weight: 600;
+  max-width: 14ch;
+}
+
+@media (max-width: 560px) { h1 { font-size: 38px; max-width: none; } }
+
+.meta {
+  color: var(--faint);
+  font-size: 15px;
+  margin: 0 0 44px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--hair);
+}
+
+.lead {
+  margin: 0 0 12px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--hair);
+}
+
+.lead p {
+  margin: 0;
+  font-size: 21px;
+  line-height: 1.55;
+  letter-spacing: -.012em;
+}
+
+.lead strong { color: var(--accent); font-weight: 600; }
+
+h2 {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  margin: 52px 0 18px;
+  color: var(--faint);
+}
+
+h2 + p, h2 + ul, h2 + ol, h2 + table, h2 + .steps { margin-top: 0; }
+
+p { margin: 0 0 18px; }
+
+ul { padding-left: 0; margin: 0 0 18px; list-style: none; }
+ul li {
+  margin: 0;
+  padding: 11px 0 11px 2px;
+  border-top: 1px solid var(--hair);
+  font-size: 16px;
+  line-height: 1.55;
+}
+ul li:last-child { border-bottom: 1px solid var(--hair); }
+
+a { color: var(--accent); text-underline-offset: 3px; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 22px;
+  font-size: 15px;
+}
+
+th {
+  font: 600 11px/1.3 -apple-system, sans-serif;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--faint);
+  text-align: left;
+  padding: 0 18px 12px 0;
+  border-bottom: 1px solid var(--hair);
+}
+
+th:nth-child(1) { width: 19%; }
+th:nth-child(2) { width: 40%; }
+th:nth-child(3) { width: 27%; }
+th:nth-child(4) { width: 14%; }
+
+td {
+  padding: 16px 18px 16px 0;
+  border-bottom: 1px solid var(--hair);
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+td:first-child { font-weight: 600; }
+
+@media (max-width: 720px) {
+  table, tbody, tr, td { display: block; width: 100%; }
+  thead { display: none; }
+  tr {
+    border-top: 1px solid var(--hair);
+    padding: 14px 0 6px;
+  }
+  tr:last-child { border-bottom: 1px solid var(--hair); }
+  td { border: 0; padding: 0 0 14px; }
+  td:first-child {
+    font-size: 17px;
+    padding-bottom: 12px;
+  }
+  td[data-label]:not(:first-child)::before {
+    content: attr(data-label);
+    display: block;
+    font: 600 10px/1.3 -apple-system, sans-serif;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 5px;
+  }
+}
+
+.note {
+  border-top: 2px solid var(--accent);
+  padding: 18px 0 0;
+  margin: 26px 0 30px;
+}
+
+.note p { margin: 0; font-size: 16px; color: var(--muted); }
+.note strong { color: var(--text); }
+
+.steps { list-style: none; margin: 0 0 18px; padding: 0; counter-reset: step; }
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 16px 0 16px 42px;
+  border-top: 1px solid var(--hair);
+  font-size: 16px;
+  line-height: 1.6;
+}
+.steps li:last-child { border-bottom: 1px solid var(--hair); }
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 16px;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  color: var(--accent);
+  font: 600 13px/24px -apple-system, sans-serif;
+  text-align: center;
+}
+
+.mail {
+  display: inline-block;
+  margin: 6px 0 8px;
+  padding: 13px 22px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.mail:hover { background: var(--accent); color: var(--bg); }
+
+footer {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 32px 56px;
+  color: var(--faint);
+  font-size: 14px;
+}
+
+@media (max-width: 880px) { footer { padding: 0 22px 48px; } }
+
+footer .inner { border-top: 1px solid var(--hair); padding-top: 24px; }
+footer a { margin-right: 20px; }
+
+.docs { list-style: none; margin: 0; padding: 0; }
+.docs li { border-top: 1px solid var(--hair); padding: 0; }
+.docs li:last-child { border-bottom: 1px solid var(--hair); }
+.docs a {
+  display: block;
+  padding: 22px 0;
+  text-decoration: none;
+  color: var(--text);
+}
+.docs .name { font-size: 21px; font-weight: 600; letter-spacing: -.015em; }
+.docs .about { color: var(--muted); font-size: 15px; margin-top: 4px; }
+.docs a:hover .name { color: var(--accent); }
